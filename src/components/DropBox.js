@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Droppable } from 'react-beautiful-dnd'
 import Answer from './Answer'
 
 const Container = styled.div`
@@ -24,11 +25,16 @@ export default class DropBox extends Component {
     return (
       <Container>
         <Title>{box.title}</Title>
-        <AnswersList>
-          {answers.map(answer => (
-            <Answer key={answer.id} answer={answer} />
-          ))}
-        </AnswersList>
+        <Droppable droppableId={box.id}>
+          {provided => (
+            <AnswersList ref={provided.innerRef} {...provided.droppableProps}>
+              {answers.map((answer, index) => (
+                <Answer key={answer.id} answer={answer} index={index} />
+              ))}
+              {provided.placeholder}
+            </AnswersList>
+          )}
+        </Droppable>
       </Container>
     )
   }
