@@ -7,8 +7,10 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid;
   border-radius: 2px;
-  width: 400px;
+  width: 300px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 `
 
 const Title = styled.h2`
@@ -17,6 +19,10 @@ const Title = styled.h2`
 
 const AnswersList = styled.div`
   padding: 8px;
+  transition: background-color 0.2s ease;
+  background-color: ${props => (props.isDraggingOver ? 'skyblue' : '')};
+  flex-grow: 1;
+  min-height: 100px;
 `
 
 export default class DropBox extends Component {
@@ -26,8 +32,12 @@ export default class DropBox extends Component {
       <Container>
         <Title>{box.title}</Title>
         <Droppable droppableId={box.id}>
-          {provided => (
-            <AnswersList ref={provided.innerRef} {...provided.droppableProps}>
+          {(provided, snapshot) => (
+            <AnswersList
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              isDraggingOver={snapshot.isDraggingOver}
+            >
               {answers.map((answer, index) => (
                 <Answer key={answer.id} answer={answer} index={index} />
               ))}

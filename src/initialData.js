@@ -8,10 +8,23 @@ const initialData = {
     1: {
       id: '1',
       title: 'Input',
-      answersIds: ['1', '2', '3']
+      answersIds: ['1', '2', '3'],
+      conceptBox: false
+    },
+    2: {
+      id: '2',
+      title: 'Computer',
+      answersIds: [],
+      conceptBox: true
+    },
+    3: {
+      id: '3',
+      title: 'Output',
+      answersIds: [],
+      conceptBox: false
     }
   },
-  boxOrder: ['1']
+  boxOrder: ['1', '2', '3']
 }
 
 export default initialData
