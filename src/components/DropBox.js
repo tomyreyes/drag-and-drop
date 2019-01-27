@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Droppable } from 'react-beautiful-dnd'
-import Answer from './Answer'
+import InnerList from './InnerList'
 
 const Container = styled.div`
   margin: 8px;
@@ -20,7 +20,7 @@ const Title = styled.h2`
 const AnswersList = styled.div`
   padding: 8px;
   transition: background-color 0.2s ease;
-  background-color: ${props => (props.isDraggingOver ? 'skyblue' : '')};
+  background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'inherit')};
   flex-grow: 1;
   min-height: 100px;
 `
@@ -32,17 +32,14 @@ export default class DropBox extends Component {
     return (
       <Container>
         <Title>{box.title}</Title>
-        <Droppable droppableId={box.id}>
+        <Droppable droppableId={box.id} isDropDisabled={box.conceptBox}>
           {(provided, snapshot) => (
             <AnswersList
               ref={provided.innerRef}
               {...provided.droppableProps}
               isDraggingOver={snapshot.isDraggingOver}
             >
-              {answers &&
-                answers.map((answer, index) => (
-                  <Answer key={answer.id} answer={answer} index={index} />
-                ))}
+              {answers && <InnerList answers={answers} />}
               {provided.placeholder}
             </AnswersList>
           )}
