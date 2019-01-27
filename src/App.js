@@ -43,6 +43,7 @@ class App extends Component {
         initialData: {
           ...this.state.initialData,
           boxes: {
+            ...this.state.initialData.boxes,
             [newBox.id]: newBox
           }
         }
@@ -51,6 +52,34 @@ class App extends Component {
       this.setState(newState)
       return
     }
+
+    const startingBoxAnswersIds = Array.from(startingBox.answersIds)
+    startingBoxAnswersIds.splice(source.index, 1)
+    const newStartingBox = {
+      ...startingBox,
+      answersIds: startingBoxAnswersIds
+    }
+    const endingBoxAnswersIds = Array.from(endingBox.answersIds)
+    endingBoxAnswersIds.splice(destination.index, 0, draggableId)
+
+    const newEndingBox = {
+      ...endingBox,
+      answersIds: endingBoxAnswersIds
+    }
+    const newState = {
+      ...this.state,
+      initialData: {
+        ...this.state.initialData,
+        boxes: {
+          ...this.state.initialData.boxes,
+          [newStartingBox.id]: newStartingBox,
+          [newEndingBox.id]: newEndingBox
+        }
+      }
+    }
+
+    this.setState(newState)
+    return
   }
 
   render() {
@@ -60,10 +89,12 @@ class App extends Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
           {initialData.boxOrder.map(boxId => {
             const box = initialData.boxes[boxId]
-
-            const boxAnswers = box.answersIds.map(
-              answerId => initialData.answers[answerId]
-            )
+            let boxAnswers
+            if (box.answersIds.length > 0) {
+              boxAnswers = box.answersIds.map(
+                answerId => initialData.answers[answerId]
+              )
+            }
             return <DropBox key={box.id} box={box} answers={boxAnswers} />
           })}
         </DragDropContext>

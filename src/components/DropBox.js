@@ -28,6 +28,7 @@ const AnswersList = styled.div`
 export default class DropBox extends Component {
   render() {
     const { answers, box } = this.props
+    console.log(answers)
     return (
       <Container>
         <Title>{box.title}</Title>
@@ -38,9 +39,10 @@ export default class DropBox extends Component {
               {...provided.droppableProps}
               isDraggingOver={snapshot.isDraggingOver}
             >
-              {answers.map((answer, index) => (
-                <Answer key={answer.id} answer={answer} index={index} />
-              ))}
+              {answers &&
+                answers.map((answer, index) => (
+                  <Answer key={answer.id} answer={answer} index={index} />
+                ))}
               {provided.placeholder}
             </AnswersList>
           )}
