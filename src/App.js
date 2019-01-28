@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './App.css'
 import { DragDropContext } from 'react-beautiful-dnd'
 import styled from 'styled-components'
 import initialData from './initialData'

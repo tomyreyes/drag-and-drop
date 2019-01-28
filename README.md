@@ -1,68 +1,61 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Drag Drop Animations
 
-## Available Scripts
+This is a small drag and drop project built with React. The idea behind this is that users should be able to drag and drop answers into the correct boxes.
 
-In the project directory, you can run:
+### Notes:
 
-### `npm start`
+I decided to use [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd) to help me build this application. This library fit my needs perfectly as it provides great support for animations, touch sensitivty and drag and drop functionalities.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In App.js you will see a lengthy onDragEnd function which handles the movement of answers between boxes. Despite its length, this is the recommended way to handle the movement of draggable elements into different droppable elements as provided by one of react-beautiful-dnd's [creators](https://egghead.io/lessons/react-move-items-between-columns-with-react-beautiful-dnd-using-ondragend).
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+For styling I used [styled-components](https://www.styled-components.com/) and flexbox. I favoured using styled components as opposed to inheriting styles from class names because I wanted build a more composed application as recommended by React's documentation. [source](https://reactjs.org/docs/composition-vs-inheritance.html)
 
-### `npm test`
+Please note that a spinner animation is present in this application. From the wireframe provided, a spinner is expected to be put on display when the user submits their answer. However, the checkAnswer function I have implemented is very fast so you will likely not see this animation at all. Feel free to add a setTimeout if you would like to see this animation.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I have created unit tests which test the helper functions I have created. These functions play a very large role in checking the user's answer so I thought it was important to create tests for these.
 
-### `npm run build`
+### Application Structure
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+├── client
+    ├── public
+    │   ├── index.html
+    ├── src
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+    ├── __tests__
+    │   │    │   ├── **.js - contain unit tests
+    │   ├── components
+    │   │    │   │── **.js - different building blocks of the application
+    │   ├── utils
+    │   │    │  ├── **.js    # Helper functions
+    │   │    │**.js
+    │   │initialData.js      # Contains the question data, including answers, questions, and the boxes used
+    │   │**.js               # React configurations
+    │
+    │
+    │
+    ├── package.json
+    ├── package.json
+    └── .gitignore
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Running this Project
 
-### `npm run eject`
+Pre-requisiets:
+[Node.js and NPM](https://nodejs.org/en/download/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+from root directory:
+npm install
+npm start - should be set to localhost:3000
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## This application was built using:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [React](https://reactjs.org/)
+- [styled-components](https://www.styled-components.com/)
+- [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Special Thanks To:
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+[Alex Reardon](https://egghead.io/lessons/react-course-introduction-beautiful-and-accessible-drag-and-drop-with-react-beautiful-dnd) for his free course on react-beautiful-dnd
