@@ -4,10 +4,22 @@ import styled from 'styled-components'
 
 const Container = styled.div`
   border: 1px solid;
-  border-radius: 2px;
+  border-radius: 10px;
   padding: 8px;
   margin-bottom: 8px;
   background-color: ${props => (props.isDragging ? 'lightgreen' : 'white')};
+  @media (max-width: 576px) {
+    font-size: 1em;
+    padding: 4px;
+  }
+`
+const AnswerText = styled.p`
+  margin: 1px;
+  padding: 2px;
+
+  @media (max-width: 576px) {
+    font-size: 0.75em;
+  }
 `
 
 export default class Answer extends Component {
@@ -22,7 +34,7 @@ export default class Answer extends Component {
             {...provided.dragHandleProps}
             isDragging={snapshot.isDragging}
           >
-            {answer.text}
+            <AnswerText>{answer.text}</AnswerText>
           </Container>
         )}
       </Draggable>
