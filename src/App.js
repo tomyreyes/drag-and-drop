@@ -6,7 +6,7 @@ import initialData from './initialData'
 import AnswerBox from './components/AnswerBox'
 import DropBox from './components/DropBox'
 import ButtonsList from './components/ButtonsList'
-import { compareArrays } from './utils/compareArrays'
+import { checkIfCorrect } from './utils/checkIfCorrect'
 import { BoxContainer, Header } from './components/DropBox'
 
 const MainLayout = styled.div`
@@ -159,16 +159,7 @@ class App extends Component {
       () => {
         const boxEntries = Object.entries(initialData.boxes)
         const answerKeyEntries = Object.entries(initialData.answerKey)
-        const isIncorrect = boxEntries.some((box, index) => {
-          let isEqual = null
-          answerKeyEntries.forEach((answerBox, i) => {
-            if (box[0] === answerBox[0]) {
-              isEqual = compareArrays(box[1].answersIds, answerBox[1])
-            }
-          })
-          return isEqual === false
-        })
-
+        const isIncorrect = checkIfCorrect(boxEntries, answerKeyEntries)
         if (isIncorrect) {
           this.setState({
             correct: false,
