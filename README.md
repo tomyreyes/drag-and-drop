@@ -2,7 +2,7 @@
 
 This is a small drag and drop project built with React. The idea behind this is that users should be able to drag and drop answers into the correct boxes.
 
-Here is a [Demo](https://codesandbox.io/s/4qy5k92m59).
+Here is a [Demo](https://codesandbox.io/s/m2zmlzkop).
 
 As well, there are installation instructions below that will help you run the application locally.
 
